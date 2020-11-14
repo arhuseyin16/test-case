@@ -3,6 +3,7 @@ import {BaseService} from '../common/base-service';
 import {Observable} from 'rxjs';
 import {UserModel} from '../model/user-model';
 import {HttpParams} from '@angular/common/http';
+import {UserPostModel} from '../model/user-post.model';
 
 @Injectable()
 export class HomeService extends  BaseService {
@@ -22,5 +23,9 @@ export class HomeService extends  BaseService {
   }
   userList(): Observable<Array<UserModel>> {
     return this.get<Array<UserModel>>('users');
+  }
+
+  userPostId(id: string): Observable<Array<UserPostModel>> {
+    return this.get<Array<UserPostModel>>(`users/ ${id}/posts`, {pageable: false});
   }
 }

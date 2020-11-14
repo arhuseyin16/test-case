@@ -31,7 +31,6 @@
               "node_modules/ng-zorro-antd/resizable/style/index.min.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {

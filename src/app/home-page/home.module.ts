@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {HomePageComponent} from './home-page.component';
+import {HomePageComponent} from './home/home-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DateTimeFormatPipe} from '../common/date.pipe';
 import {HomeService} from '../service/home.service';
 import {HttpClientModule} from '@angular/common/http';
-import {JwPaginationModule} from 'jw-angular-pagination';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
+import { PostPageComponent } from './post-page/post-page.component';
 
 const route: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
-  {path: 'list', component: HomePageComponent}
+  {path: 'list', component: HomePageComponent},
+  {path: 'user/:id/:name', component: PostPageComponent}
 ];
 
 @NgModule({
-  declarations: [HomePageComponent, DateTimeFormatPipe],
+  declarations: [HomePageComponent, PostPageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(route),
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    JwPaginationModule
+    PaginationModule
   ],
   providers: [HomeService]
 })

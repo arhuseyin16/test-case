@@ -1,0 +1,65 @@
+<div class="main m-5">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-end" (keyup)="searchNameClick()">
+                <input type="text" [(ngModel)]="searchNameValue" class="form-control input" placeholder="Kullanıcı Adına Göre Arama">
+            </div>
+            <table class="table mt-5">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of users; let i = index;">
+                <th>{{i+1}}</th>
+                <td>{{item?.name}}</td>
+                <td>{{item?.email}}</td>
+                <td>{{item?.gender}}</td>
+                <td>{{item?.status}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-dark" (click)="laterViewedUsers(item)">View Posts</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-5">
+              <pagination (click)="clickPage($event)" [maxSize]="maxSize" [totalItems]="pagination?.total" [itemsPerPage]="pagination?.limit"></pagination>
+            </div>
+            <div class="col-sm-10 mt-5">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <p class="text-center">Laters Viewed Users</p>
+            <div class="card mt-5" *ngFor="let users of viewedUsers">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <p class="users-item">{{users?.name}}</p>
+                    <p class="users-item">{{users?.status}}</p>
+                    <p class="users-item">{{users?.gender}}</p>
+                  </div>
+                  <div class="col-sm-4 pt-3">
+                    <button type="button" class="btn btn-outline-dark">View Posts</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

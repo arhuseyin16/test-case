@@ -1,0 +1,21 @@
+.form-control.input {
+  width: 50%;
+  border: 1px solid #212529;
+}
+.table th, .table td {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+button:focus {
+  outline: none;
+}
+
+.card {
+  border: 1px solid #212529 !important;
+}
+
+p.users-item {
+  font-size: 12px;
+}

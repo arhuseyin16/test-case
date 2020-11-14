@@ -4,17 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '**',
-    redirectTo: 'home-page'
+    path: '',
+    redirectTo: 'home-page',
+    pathMatch: 'full'
   },
   {
     path: 'home-page',
     loadChildren: () => import('./home-page/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'post-page',
-    loadChildren: () => import('./post-page/post.module').then(m => m.PostModule)
-  }
+    path: '**',
+    redirectTo: 'home-page',
+  },
 ];
 
 @NgModule({
