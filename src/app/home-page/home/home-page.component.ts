@@ -23,10 +23,14 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.viewedUsers = new Array<any>();
+    this.usersPageable();
+  }
+
+  usersPageable() {
     this.homeService.userList().subscribe(res => {
-     this.users = res['data'];
-     this.pagination.total = res['meta']['pagination'].total;
-     this.pagination.limit = res['meta']['pagination'].limit;
+      this.users = res['data'];
+      this.pagination.total = res['meta']['pagination'].total;
+      this.pagination.limit = res['meta']['pagination'].limit;
     });
   }
 
@@ -41,18 +45,10 @@ export class HomePageComponent implements OnInit {
   searchNameClick() {
     if (this.searchNameValue !== null && this.searchNameValue !== undefined && this.searchNameValue !== '' ) {
       this.homeService.searchNameValue = this.searchNameValue;
-      this.homeService.userList().subscribe(res => {
-        this.users = res['data'];
-        this.pagination.total = res['meta']['pagination'].total;
-        this.pagination.limit = res['meta']['pagination'].limit;
-      });
+      this.usersPageable();
     } else {
       this.homeService.searchNameValue = '';
-      this.homeService.userList().subscribe(res => {
-        this.users = res['data'];
-        this.pagination.total = res['meta']['pagination'].total;
-        this.pagination.limit = res['meta']['pagination'].limit;
-      });
+      this.usersPageable();
     }
   }
 
