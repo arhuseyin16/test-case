@@ -19,11 +19,17 @@ export class HomePageComponent implements OnInit {
   page: number;
   searchNameValue: string;
   maxSize = 7;
-  viewedUsers: Array<UserModel>;
+  viewedUsers: Array<any> = new Array<any>();
+  listUsers: Array<UserModel> = new Array<UserModel>();
 
   ngOnInit(): void {
-    this.viewedUsers = new Array<any>();
     this.usersPageable();
+    if (localStorage.getItem('usersList')) {
+      this.viewedUsers = JSON.parse(localStorage['usersList']);
+    }
+    if (this.viewedUsers.length !== 0) {
+      this.listUsers = this.viewedUsers;
+    }
   }
 
   usersPageable() {
@@ -52,10 +58,40 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  userListLengthValidation() {
+    if (this.listUsers.length > 4) {
+      this.listUsers.shift();
+    }
+  }
+
+  laterUsersAdd(user) {
+    let status = true;
+    if (this.listUsers.length > 0) {
+      this.listUsers.forEach(row => {
+        if (status === true) {
+          if (row.id === user.id) {
+            status = false;
+          }
+        }
+      });
+      if (status === true) {
+        this.userListLengthValidation();
+        this.listUsers.push(user);
+        localStorage['usersList'] = JSON.stringify(this.listUsers);
+      }
+    } else {
+      this.listUsers.push(user);
+      localStorage['usersList'] = JSON.stringify(this.listUsers);
+    }
+  }
+
   laterViewedUsers(item) {
-    console.log(item);
-    this.viewedUsers.push(item);
-    this.router.navigate(['/home-page/user', item.id, item.name]);
+   this.laterUsersAdd(item);
+   this.router.navigate(['/home-page/user', item.id]);
+  }
+
+  laterUsersViewPostsClick(user) {
+    this.router.navigate(['/home-page/user', user.id]);
   }
 }
 
